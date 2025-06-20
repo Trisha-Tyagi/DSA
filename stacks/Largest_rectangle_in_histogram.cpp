@@ -8,7 +8,7 @@ vector<int> left_small_element(vector<int> histogram){
     vector<int> result(n,-1);
     stack<int> st;
     for(int i=0;i<n;i++){
-        while(!st.empty() && histogram[st.top()]>histogram[i]){
+        while(!st.empty() && histogram[st.top()]>=histogram[i]){
             st.pop();
         }
         if(!st.empty()) result[i]=st.top();
@@ -21,10 +21,10 @@ vector<int> left_small_element(vector<int> histogram){
 //finding right first smaller element
 vector<int> right_small_element(vector<int> histogram){
     int n=histogram.size();
-    vector<int> result(n,-1);
+    vector<int> result(n,n);
     stack<int> st;
-    for(int i=n-1;i>0;i--){
-        while(!st.empty() && histogram[st.top()]>histogram[i]){
+    for(int i=n-1;i>=0;i--){
+        while(!st.empty() && histogram[st.top()]>=histogram[i]){
             st.pop();
         }
         if(!st.empty()) result[i]=st.top();
