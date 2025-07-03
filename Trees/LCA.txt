@@ -1,0 +1,11 @@
+// int lca(node * root,int no1,int no2){
+//     int left=0,right=0;
+//     if(root==nullptr) return 0;
+//     if(root->left)  left=lca(root->left,no1,no2);
+//     if(root->right)  right=lca(root->right,no1,no2);
+//     if((left && right) || root->data ==no1 || root->data ==no2) return root->data;
+//     if(left!=0) return left;
+//     if(right!=0) return right;
+//     return 0;
+
+// }
