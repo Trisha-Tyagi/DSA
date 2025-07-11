@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    vector<int> arr={1,2,3,2,4,3,6,5,6,4,3};
+    vector<int> arr={1,-2,3,-2,4,3,-1,2,6,4,3};
     int k=7;
     map<long long,int> Sumindex;
     int n=arr.size();
@@ -29,6 +29,6 @@ int main(){
 
 
     }
-    
     cout<<max_len;
+    return 0;    
 }
