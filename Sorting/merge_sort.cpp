@@ -1,58 +1,54 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 
-void conquer(int arr[], int si, int mid, int ei) {
-    int size = ei - si + 1;
-    int merged_array[size];
-    int i = si;       // Pointer for the left half
-    int j = mid + 1;  // Pointer for the right half
-    int k = 0;        // Pointer for the merged array
-
-    // Merge the two halves
-    while (i <= mid && j <= ei) {
-        if (arr[i] <= arr[j]) {
-            merged_array[k++] = arr[i++];
-        } else {
-            merged_array[k++] = arr[j++];
+void merge(vector<int> &arr,int lb,int mid,int ub){
+    int left=lb;
+    int right=mid+1;
+    vector<int> temp;
+    while(left<=mid && right<=ub){
+        if(arr[left]<arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            right++;
         }
     }
-
-    // Copy remaining elements from the left half
-    while (i <= mid) {
-        merged_array[k++] = arr[i++];
+    while(left<=mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+    while(right<=ub){
+        temp.push_back(arr[right]);
+        right++;
     }
 
-    // Copy remaining elements from the right half
-    while (j <= ei) {
-        merged_array[k++] = arr[j++];
+    for(int i=lb;i<=ub;i++){
+        arr[i]=temp[i-lb];
     }
 
-    // Copy the merged array back into the original array
-    for (int l = 0; l < size; l++) {
-        arr[si + l] = merged_array[l];
-    }
 }
 
-void divide(int arr[], int si, int ei) {
-    if (si < ei) {
-        int mid = si + (ei - si) / 2;  // Find the middle index
-        divide(arr, si, mid);         // Sort the left half
-        divide(arr, mid + 1, ei);     // Sort the right half
-        conquer(arr, si, mid, ei);    // Merge the two halves
-    }
+
+void mergesort(vector<int>& arr,int lb,int ub){
+    if(lb>=ub) return ;
+    int mid=(lb+ub)/2;
+    mergesort(arr,lb,mid);
+    mergesort(arr,mid+1,ub);
+    merge(arr,lb,mid,ub);
+    
+
 }
 
-int main() {
-    int arr[5] = {5, 4, 32, 9, 39};
-    int size = 5;
 
-    divide(arr, 0, size - 1);  // Correctly specify the range of the array
-
-    cout << "Sorted Array: ";
-    for (int i = 0; i < size; i++) {  // Correct loop bounds
-        cout << arr[i] << " ";
+int main(){
+    vector<int> arr={3,23,45,63,13,-1,10,2,-45,-2,9,60};
+    int n=arr.size();
+    mergesort(arr,0,n-1);
+    for(int i:arr){
+        cout<<i<<" ";
     }
-    cout << endl;
-
     return 0;
 }
