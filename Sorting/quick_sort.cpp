@@ -1,46 +1,40 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
-#include <algorithm>
 using namespace std;
-int quicksort(int a[],int lb,int ub){
-    int pivot=a[lb];
-    int start=lb;
-    int end=ub;
-    while (start<end){
-        while(pivot>=a[start]){
-            start++;
-            
-        }
-        
-        while(pivot<a[end]){
-            end--;
-        }
-        if (start<end){
-            swap(a[start],a[end]);
+
+// Function to partition the array
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; // Taking last element as pivot
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]); // Swap smaller element to the left
         }
     }
-    swap(a[lb],a[end]);
-    return end;
-}
-void Quicksort(int a[],int lb,int ub){
-    if(lb<ub){
-    int loc;
-    loc = quicksort(a,lb,ub);
-    Quicksort(a,lb,loc-1);
-    Quicksort(a,loc+1,ub);
-    }
-}
-int main(){
-    int a[]={1,3,22,4,11,5};
-    int size=sizeof(a)/sizeof(a[0]);
-    Quicksort(a,0,size-1);
-    cout << "Sorted array: ";
-    for (int i = 0; i < size; i++) {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-    
-    
-    return 0;
+    swap(arr[i + 1], arr[high]); // Place pivot in the correct position
+    return i + 1;
 }
 
+// QuickSort function
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high); // Partitioning index
+
+        quickSort(arr, low, pi - 1);  // Sort left subarray
+        quickSort(arr, pi + 1, high); // Sort right subarray
+    }
+}
+
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    quickSort(arr, 0, n - 1);
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
