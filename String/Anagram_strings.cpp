@@ -2,7 +2,8 @@
 #include<string>
 #include<vector>
 using namespace std;
-
+// Time Complexity:O(n)
+// Spacce complexity:O(1)
 bool Anagram(string s1,string s2){
     vector<int> result(26,0);
     int n=s1.size();
