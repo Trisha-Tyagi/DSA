@@ -4,13 +4,15 @@ using namespace std;
 // TC:O(n)
 // SC:O(1)
 int str_to_int(string s){
-     int n=s.size();
+    
+    
+        int n=s.size();
     int sign=1;
     int i=0;
     int ans=0;
     while(i<n && s[i]== ' ') i++;
     if(i==n) return ans;
-    if(s[i]=='-'){ sign=0;
+    if(s[i]=='-'){ sign=-1;
         i++;}
     else if(s[i]=='+'){
         sign=1;
@@ -27,8 +29,9 @@ int str_to_int(string s){
             ans = ans * 10 + digit;
             i++;
         }
-    if(sign==0) return -1*ans;
+    if(sign==-1) return sign*ans;
     return ans;
+    
     }
 int main(){
     string s="   -567ab";
