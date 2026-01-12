@@ -27,6 +27,8 @@ public:
                 if(dist[it]>dist[node]+1){
                     dist[it]=dist[node]+1;
                     q.push(it);
+                    // If we already updated the distance of a node, why do we still need to push it into the queue?
+                    // Because updating the distance only fixes that node — pushing it into the queue allows that node to fix others.
                 }
             }
         }
