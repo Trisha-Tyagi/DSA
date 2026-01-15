@@ -2,6 +2,7 @@
 #include<vector>
 #include<queue>
 using namespace std;
+// choose BFS becaue it traverse level by level with unit edge
 // each edge has unit weight
 class Solution {
 public:
